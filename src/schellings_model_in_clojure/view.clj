@@ -7,7 +7,7 @@
             [seesaw.tree :as stree]
             [seesaw.bind :as sb]))
 
-(def number-of-individuals-on-a-side 30)
+(def number-of-individuals-on-a-side 3)
 (def individual-rectangle-size 10)
 
 (defn neighborhood [[x y]]

@@ -13,6 +13,7 @@
 
 (def population (atom []))
 (def positions (atom []))
+(def empties (atom []))
 
 (defn handle-neighbor-change
   "Called when the state of a neighboring position changes.
@@ -30,8 +31,9 @@
   ; needs to be done. Otherwise everything will end up happening in
   ; the main thread.
   ;;;;(send @me moveIfUnhappy)
+  (if (= neighbor me) (println "setupppppppppppppppppppppppppp"))
   (if (nil? @me) (println "I'm a nil mee!!"))
-  (println (str "I am " @me " and my neighbor " @neighbor " (key " @key ") changed from " @old-state " to " @new-state)))
+  (println (str "I am " me " and my neighbor " @neighbor " (key " @key ") changed from " @old-state " to " @new-state)))
 
 ;; You may be able to leave this alone, but feel free to change it
 ;; if you decide to structure your solution differently.
@@ -41,6 +43,8 @@
  (let [color (if (< (rand) @empty-atom) nil (if (< (rand) @balance-atom) :red :blue))
           individual (agent {:color color})
           position (atom individual)]
+
+      (if (nil? color) (swap! empties conj individual))
       ; I need to have all the individuals together in
       ; a collection so I can `send` them all a "message"
       ; when, e.g., we hit the "Start" button.
