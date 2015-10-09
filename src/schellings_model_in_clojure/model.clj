@@ -57,11 +57,9 @@
    desired color, or 'white' if there's no individual there (i.e., we
    get passed nil)."
   [individual]
+  ;;(println  @individual)
   ; This returns a totally random color so it should be quite
   ; obvious if you haven't dealt with this. You can specify colors
   ; with things like strings ("blue") or keywords (:red).
-  (seesaw.color/color (rand-int 256)
-                      (rand-int 256)
-                      (rand-int 256)
-                      (rand-int 256))
+  (seesaw.color/color (if (nil? individual) :white @individual))
   )
