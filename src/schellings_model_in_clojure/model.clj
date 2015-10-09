@@ -29,18 +29,17 @@
   ; probably where you want to call send to handle whatever
   ; needs to be done. Otherwise everything will end up happening in
   ; the main thread.
-  (println (str "I am " me " and my neighbor " neighbor " (key " key ") changed from " old-state " to " new-state)))
+  ;;;;(send @me moveIfUnhappy)
+  (if (nil? @me) (println "I'm a nil mee!!"))
+  (println (str "I am " @me " and my neighbor " @neighbor " (key " @key ") changed from " @old-state " to " @new-state)))
 
 ;; You may be able to leave this alone, but feel free to change it
 ;; if you decide to structure your solution differently.
-(defn make-position
-  "Create a position atom that contains an individual agent, or nil
+(defn make-position []
+  "Create a position atom that contains an individual agent, or an agent with the color nil
   if there's no individual there."
-  []
-  (if (< (rand) @empty-atom)
-    (atom nil)
-    (let [color (if (< (rand) @balance-atom) :red :blue)
-          individual (agent color)
+ (let [color (if (< (rand) @empty-atom) nil (if (< (rand) @balance-atom) :red :blue))
+          individual (agent {:color color})
           position (atom individual)]
       ; I need to have all the individuals together in
       ; a collection so I can `send` them all a "message"
@@ -49,7 +48,21 @@
       ; I'm not sure if I need all the positions, actually,
       ; but I found that useful for debugging.
       (swap! positions conj position)
-      position)))
+      position))
+
+;;   (if (< (rand) @empty-atom)
+;;     (atom nil)
+;;     (let [color (if (< (rand) @balance-atom) :red :blue)
+;;           individual (agent color)
+;;           position (atom individual)]
+;;       ; I need to have all the individuals together in
+;;       ; a collection so I can `send` them all a "message"
+;;       ; when, e.g., we hit the "Start" button.
+;;       (swap! population conj individual)
+;;       ; I'm not sure if I need all the positions, actually,
+;;       ; but I found that useful for debugging.
+;;       (swap! positions conj position)
+;;       position)))
 
 (defn extract-color
   "Takes an individual agent and returns the color of the individual
@@ -57,9 +70,7 @@
    desired color, or 'white' if there's no individual there (i.e., we
    get passed nil)."
   [individual]
-  ;;(println  @individual)
-  ; This returns a totally random color so it should be quite
-  ; obvious if you haven't dealt with this. You can specify colors
-  ; with things like strings ("blue") or keywords (:red).
-  (seesaw.color/color (if (nil? individual) :white @individual))
+  (let [color (:color @individual)]
+    (seesaw.color/color (if (nil? color) :white color)))
+  ;;(seesaw.color/color (rand-int 256)(rand-int 256)(rand-int 256)(rand-int 256))
   )
