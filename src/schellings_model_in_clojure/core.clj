@@ -22,20 +22,18 @@
   ;; binding was wired up correctly.
   (let [f (nth (deref model/positions) 0)
         fi @f
-        s (nth (deref model/positions) 0)
+        s (nth (deref model/positions) 1)
         si @s]
     (Thread/sleep 1000)
     (swap! f (fn [_] si))
     (swap! s (fn [_] fi))
-            (println " ")
-    (swap! s (fn [_] si))
 
 
 
 
     ;;Unused
-    ;(defn add-to-agent-map [agent k v]
-    ; (assoc agent k v))
+    ;(defn modify-individual [individual k v]
+    ; (assoc individual k v))
     ; (doseq [agnt @model/population] (send agnt model/add-to-agent-map :test :val))
 
 

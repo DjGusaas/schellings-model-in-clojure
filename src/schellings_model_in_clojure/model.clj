@@ -15,6 +15,20 @@
 (def positions (atom []))
 (def empties (atom []))
 
+(defn modify-individual [individual k v]
+  (assoc individual k v))
+
+
+(defn move-my-counters [me]
+      (println me)
+     ; (println new )
+      (println me)
+    ;One less of this type of neighbor
+   ; (modify-individual @me old (dec (@@me old)))
+  ;One more of this type of neighbor
+   ;(modify-individual @me new (inc (@@me new)))
+
+)
 
 (defn handle-neighbor-change
   "Called when the state of a neighboring position changes.
@@ -25,6 +39,29 @@
    counts for this position without requiring that it go look
    at its neighbors."
   [me key neighbor old-state new-state]
+
+
+
+  (let [old (:color @old-state)
+        new (:color @new-state)]
+
+    ;;Oh my! My neighbor moved. Let me update my counts:
+    (println old " and new is " new)
+
+
+    (println "My old state: " @@me)
+    (swap! me move-my-counters)
+    (println "My NEW state: " @@me)
+
+   ; (println (@@me new))
+
+
+
+
+
+  )
+
+
   ; You'll obviously want to replace this with some code that actually
   ; does something useful :-)
   ; If your positions contain individuals as agents, this is
