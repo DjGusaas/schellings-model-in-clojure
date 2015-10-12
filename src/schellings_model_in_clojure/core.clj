@@ -33,7 +33,7 @@
 
 
 
-    (doseq [agnt @model/population] (send agnt model/add-to-agent-map :test :val))
+   ; (doseq [agnt @model/population] (send agnt model/add-to-agent-map :test :val))
 
 
     ;(doseq [i @model/population] (send i assoc :test :value))

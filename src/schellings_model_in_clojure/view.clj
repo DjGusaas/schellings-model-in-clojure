@@ -52,12 +52,23 @@
           [c (sc/canvas :background "white"
                         :size [individual-rectangle-size :by individual-rectangle-size])])))
 
+;;counting method taken from page 57 of book
+(defn word-frequencies [words]
+  (reduce
+    (fn [counts word] (assoc counts word (inc (get counts word 0))))
+    {} words))
+
+;(defn add-to-agent-map [agent k v]
+;  (assoc agent k v))
+
 (defn tally-neighbors [board-map]
   (doseq [[posn individual] board-map]
   (println "Tallying for a new square at " posn " !!!!!!!" )
-    (let [storage [] ]
-      (doseq [a (neighbors posn board-map)]  (conj storage (name (:color @@a)  )))
-      (println storage)
+    (let [storage (vec (for [a (neighbors posn board-map)] (:color @@a)))
+          counts (word-frequencies storage)]
+
+      (send @individual merge counts)
+      (println  @individual)
       )
 
 

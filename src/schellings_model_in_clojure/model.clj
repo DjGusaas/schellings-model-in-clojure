@@ -15,8 +15,9 @@
 (def positions (atom []))
 (def empties (atom []))
 
-(defn add-to-agent-map [agent k v]
-  (assoc agent k v))
+;;Unused
+;(defn add-to-agent-map [agent k v]
+;  (assoc agent k v))
 
 (defn handle-neighbor-change
   "Called when the state of a neighboring position changes.
