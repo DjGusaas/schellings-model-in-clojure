@@ -52,6 +52,16 @@
           [c (sc/canvas :background "white"
                         :size [individual-rectangle-size :by individual-rectangle-size])])))
 
+(defn tally-neighbors [board-map]
+  (doseq [[posn atm] board-map]
+    (doseq [neighbor (neighbors posn board-map)]
+      (println "A neightbor:")
+      (println neighbor)
+      (println @neighbor)
+      (println (:color @neighbor))
+      (send @atm model/add-to-agent-map (:color @neighbor) :5)))
+)
+
 (defn add-neighborhood-watchers [board-map]
   "Take the board map, and generate all the watchers between position
    atoms in adjacent coordinate positions."
@@ -95,6 +105,7 @@
         board-map (make-board-map coordinates)
         tile-map (make-tile-map coordinates)]
     (add-neighborhood-watchers board-map)
+    (tally-neighbors board-map)
     (bind-tiles coordinates board-map tile-map)
     (create-tile-array coordinates tile-map board-map)))
 

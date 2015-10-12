@@ -15,6 +15,9 @@
 (def positions (atom []))
 (def empties (atom []))
 
+(defn add-to-agent-map [agent k v]
+  (assoc agent k v))
+
 (defn handle-neighbor-change
   "Called when the state of a neighboring position changes.
    The first argument will be the position atom that is being
@@ -40,7 +43,7 @@
 (defn make-position []
   "Create a position atom that contains an individual agent, or an agent with the color nil
   if there's no individual there."
- (let [color (if (< (rand) @empty-atom) nil (if (< (rand) @balance-atom) :red :blue))
+ (let [color (if (< (rand) @empty-atom) :white (if (< (rand) @balance-atom) :red :blue))
           individual (agent {:color color})
           position (atom individual)]
 
@@ -75,6 +78,6 @@
    get passed nil)."
   [individual]
   (let [color (:color @individual)]
-    (seesaw.color/color (if (nil? color) :white color)))
+    (seesaw.color/color color))
   ;;(seesaw.color/color (rand-int 256)(rand-int 256)(rand-int 256)(rand-int 256))
   )

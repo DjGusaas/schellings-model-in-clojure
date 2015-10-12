@@ -31,10 +31,9 @@
     (swap! s (fn [_] si))
 
 
-    (defn init-with-watchers [i]
-      (assoc i :test :val))
 
-    (doseq [i @model/population] (send i init-with-watchers))
+
+    (doseq [agnt @model/population] (send agnt model/add-to-agent-map :test :val))
 
 
     ;(doseq [i @model/population] (send i assoc :test :value))
