@@ -15,9 +15,6 @@
 (def positions (atom []))
 (def empties (atom []))
 
-;;Unused
-;(defn add-to-agent-map [agent k v]
-;  (assoc agent k v))
 
 (defn handle-neighbor-change
   "Called when the state of a neighboring position changes.
@@ -35,7 +32,6 @@
   ; needs to be done. Otherwise everything will end up happening in
   ; the main thread.
   ;;;;(send @me moveIfUnhappy)
-  (if (= neighbor me) (println "setupppppppppppppppppppppppppp"))
   (if (nil? @me) (println "I'm a nil mee!!"))
   (println (str "I am " me " and my neighbor " @neighbor " (key " @key ") changed from " @old-state " to " @new-state)))
 
@@ -48,6 +44,7 @@
           individual (agent {:color color :red 0 :blue 0 :white 0})
           position (atom individual)]
 
+      ;keep of list of places that a color could move.
       (if (nil? color) (swap! empties conj individual))
       ; I need to have all the individuals together in
       ; a collection so I can `send` them all a "message"
@@ -58,20 +55,6 @@
       (swap! positions conj position)
       position))
 
-;;   (if (< (rand) @empty-atom)
-;;     (atom nil)
-;;     (let [color (if (< (rand) @balance-atom) :red :blue)
-;;           individual (agent color)
-;;           position (atom individual)]
-;;       ; I need to have all the individuals together in
-;;       ; a collection so I can `send` them all a "message"
-;;       ; when, e.g., we hit the "Start" button.
-;;       (swap! population conj individual)
-;;       ; I'm not sure if I need all the positions, actually,
-;;       ; but I found that useful for debugging.
-;;       (swap! positions conj position)
-;;       position)))
-
 (defn extract-color
   "Takes an individual agent and returns the color of the individual
    at that position. You'll need to implement this so that it returns
@@ -79,7 +62,5 @@
    get passed nil)."
   [individual]
   (let [color (:color @individual)]
-    (println "EXTACTINGH CVOLOLILRJ" @individual)
     (seesaw.color/color color))
-  ;;(seesaw.color/color (rand-int 256)(rand-int 256)(rand-int 256)(rand-int 256))
   )

@@ -58,27 +58,14 @@
     (fn [counts word] (assoc counts word (inc (get counts word 0))))
     {} words))
 
-;(defn add-to-agent-map [agent k v]
-;  (assoc agent k v))
-
+;Iterates over every square on the board, initizing each squares internal count.
+;From here on out, only watchers will touch the values, and each each agent will know when it should move.
 (defn tally-neighbors [board-map]
   (doseq [[posn individual] board-map]
-  (println "Tallying for a new square at " posn " !!!!!!!" )
     (let [storage (vec (for [a (neighbors posn board-map)] (:color @@a)))
-          counts (word-frequencies storage)]
-
-      (send @individual merge counts)
-      (println  @individual)
-      )
-
-
-    ;(doseq [neighbor (neighbors posn board-map)]
-      (println "A neightbor:")
-      ;println @@neighbor)
-
-      ;(let [color (:color @@neighbor)]
-      ;(await (send @individual model/add-to-agent-map color (inc (color @@neighbor)))))
-    ;)
+          counts (word-frequencies storage)] ;make the tally/count map
+      (send @individual merge counts) ;merge counts into the agent's map
+    )
   )
 )
 

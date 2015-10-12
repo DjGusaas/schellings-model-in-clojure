@@ -33,11 +33,16 @@
 
 
 
-   ; (doseq [agnt @model/population] (send agnt model/add-to-agent-map :test :val))
+    ;;Unused
+    ;(defn add-to-agent-map [agent k v]
+    ; (assoc agent k v))
+    ; (doseq [agnt @model/population] (send agnt model/add-to-agent-map :test :val))
 
 
     ;(doseq [i @model/population] (send i assoc :test :value))
-    (println @model/population)
+
+    ;A system state printout
+    ;(println @model/population)
 
 
 
