@@ -53,13 +53,22 @@
                         :size [individual-rectangle-size :by individual-rectangle-size])])))
 
 (defn tally-neighbors [board-map]
-  (doseq [[posn atm] board-map]
-    (doseq [neighbor (neighbors posn board-map)]
+  (doseq [[posn individual] board-map]
+  (println "Tallying for a new square at " posn " !!!!!!!" )
+    (let [storage [] ]
+      (doseq [a (neighbors posn board-map)]  (conj storage (name (:color @@a)  )))
+      (println storage)
+      )
+
+
+    ;(doseq [neighbor (neighbors posn board-map)]
       (println "A neightbor:")
-      (println neighbor)
-      (println @neighbor)
-      (println (:color @neighbor))
-      (send @atm model/add-to-agent-map (:color @neighbor) :5)))
+      ;println @@neighbor)
+
+      ;(let [color (:color @@neighbor)]
+      ;(await (send @individual model/add-to-agent-map color (inc (color @@neighbor)))))
+    ;)
+  )
 )
 
 (defn add-neighborhood-watchers [board-map]

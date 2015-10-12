@@ -44,7 +44,7 @@
   "Create a position atom that contains an individual agent, or an agent with the color nil
   if there's no individual there."
  (let [color (if (< (rand) @empty-atom) :white (if (< (rand) @balance-atom) :red :blue))
-          individual (agent {:color color})
+          individual (agent {:color color :red 0 :blue 0 :white 0})
           position (atom individual)]
 
       (if (nil? color) (swap! empties conj individual))
@@ -78,6 +78,7 @@
    get passed nil)."
   [individual]
   (let [color (:color @individual)]
+    (println "EXTACTINGH CVOLOLILRJ" @individual)
     (seesaw.color/color color))
   ;;(seesaw.color/color (rand-int 256)(rand-int 256)(rand-int 256)(rand-int 256))
   )

@@ -37,7 +37,7 @@
 
 
     ;(doseq [i @model/population] (send i assoc :test :value))
-    (println model/population)
+    (println @model/population)
 
 
 
