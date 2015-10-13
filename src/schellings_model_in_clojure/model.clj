@@ -20,9 +20,9 @@
 
 
 (defn move-my-counters [me]
-      (println me)
+      (println "kitten")
      ; (println new )
-      (println me)
+ ;     (println me)
     ;One less of this type of neighbor
    ; (modify-individual @me old (dec (@@me old)))
   ;One more of this type of neighbor
@@ -45,15 +45,12 @@
   (let [old (:color @old-state)
         new (:color @new-state)]
 
-    ;;Oh my! My neighbor moved. Let me update my counts:
-    (println old " and new is " new)
-
-
+    ;;Oh my! My neighbor moved.
+    (println "My neighbor used to be "old " but now they are " new)
+    ;Let me update my counts:
     (println "My old state: " @@me)
-    (send @me move-my-counters)
-    ;(println "My NEW state: " @@me)
-
-   ; (println (@@me new))
+    (send @me move-my-counters) ;tell the agent to update neigborhood stats.
+    (println "My NEW state: " @@me)
 
   )
 
@@ -65,8 +62,9 @@
   ; needs to be done. Otherwise everything will end up happening in
   ; the main thread.
   ;;;;(send @me moveIfUnhappy)
-  (if (nil? @me) (println "I'm a nil mee!!"))
-  (println (str "I am " me " and my neighbor " @neighbor " (key " @key ") changed from " @old-state " to " @new-state)))
+ ; (if (nil? @me) (println "I'm a nil mee!!"))
+  (println (str "I am " me " and my neighbor " @neighbor " (key " @key ") changed from " @old-state " to " @new-state))
+  )
 
 ;; You may be able to leave this alone, but feel free to change it
 ;; if you decide to structure your solution differently.
