@@ -50,14 +50,10 @@
 
 
     (println "My old state: " @@me)
-    (swap! me move-my-counters)
-    (println "My NEW state: " @@me)
+    (send @me move-my-counters)
+    ;(println "My NEW state: " @@me)
 
    ; (println (@@me new))
-
-
-
-
 
   )
 
