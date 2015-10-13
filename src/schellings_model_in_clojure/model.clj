@@ -12,7 +12,6 @@
 (def empty-atom (atom default-empty))
 
 (def population (atom []))
-(def positions (atom []))
 (def empties (atom []))
 
 (defn modify-individual [individual k v]
@@ -49,8 +48,8 @@
     (println old " and new is " new)
 
 
-    (println "My old state: " @@me)
-    (send @me move-my-counters)
+    ;(println "My old state: " @@me)
+    (send me move-my-counters)
     ;(println "My NEW state: " @@me)
 
    ; (println (@@me new))
@@ -74,19 +73,17 @@
   "Create a position atom that contains an individual agent, or an agent with the color nil
   if there's no individual there."
  (let [color (if (< (rand) @empty-atom) :white (if (< (rand) @balance-atom) :red :blue))
-          individual (agent {:color color :red 0 :blue 0 :white 0})
-          position (atom individual)]
+          individual (agent {:color color :red 0 :blue 0 :white 0})]
 
       ;keep of list of places that a color could move.
-      (if (nil? color) (swap! empties conj individual))
+  ;;;    (if (nil? color) (swap! empties conj individual))
       ; I need to have all the individuals together in
       ; a collection so I can `send` them all a "message"
       ; when, e.g., we hit the "Start" button.
-      (swap! population conj individual)
+      ;(swap! population conj individual)
       ; I'm not sure if I need all the positions, actually,
       ; but I found that useful for debugging.
-      (swap! positions conj position)
-      position))
+      individual))
 
 (defn extract-color
   "Takes an individual agent and returns the color of the individual

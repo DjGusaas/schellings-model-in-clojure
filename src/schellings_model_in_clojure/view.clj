@@ -62,9 +62,9 @@
 ;From here on out, only watchers will touch the values, and each each agent will know when it should move.
 (defn tally-neighbors [board-map]
   (doseq [[posn individual] board-map]
-    (let [storage (vec (for [a (neighbors posn board-map)] (:color @@a)))
+    (let [storage (vec (for [a (neighbors posn board-map)] (:color @a)))
           counts (word-frequencies storage)] ;make the tally/count map
-      (send @individual merge counts) ;merge counts into the agent's map
+      (send individual merge counts) ;merge counts into the agent's map
     )
   )
 )
@@ -119,6 +119,7 @@
 (defn make-tile-grid
   "Convert the list of list of tiles into GUI components."
   [tile-array]
+  (println tile-array)
   (sc/vertical-panel
    :items (for [row tile-array]
             (sc/horizontal-panel :items row))))
