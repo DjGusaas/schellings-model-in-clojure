@@ -19,8 +19,10 @@
   (assoc individual k v))
 
 
-(defn move-my-counters [me]
-      (println "kitten")
+(defn move-my-counters [me old new]
+      (println "kitten" old "/kitten")
+ (assoc me old (dec (me old)) new (inc (me new)))
+
      ; (println new )
  ;     (println me)
     ;One less of this type of neighbor
@@ -49,7 +51,7 @@
     (println "My neighbor used to be "old " but now they are " new)
     ;Let me update my counts:
     (println "My old state: " @@me)
-    (send @me move-my-counters) ;tell the agent to update neigborhood stats.
+    (send @me move-my-counters old new) ;tell the agent to update neigborhood stats.
     (println "My NEW state: " @@me)
 
   )

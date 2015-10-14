@@ -20,6 +20,7 @@
   ;; included this to "force" some sort of change in the
   ;; system so I could confirm that all my watching and
   ;; binding was wired up correctly.
+  (println "hi" @model/population)
   (let [f (nth (deref model/positions) 0)
         fi @f
         s (nth (deref model/positions) 1)
@@ -40,7 +41,7 @@
     ;(doseq [i @model/population] (send i assoc :test :value))
 
     ;A system state printout
-    ;(println @model/population)
+    (println "bye" @model/population)
 
 
 
