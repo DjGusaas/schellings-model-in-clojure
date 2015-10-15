@@ -80,7 +80,7 @@
     ; key to be unique for each watcher on a given position; I'm using
     ; neighbor for that, since no position should have more than one
     ; watcher for a given neighbor.
-    (add-watch position neighbor
+    (add-watch position neighbor;( :color @@neighbor)
                (partial model/handle-neighbor-change neighbor))))
 
 (defn bind-tiles [coordinates board-map tile-map]
@@ -89,7 +89,8 @@
    atom at that position changes, then the color of the bound
    tile should change to the color of the new value of that atom."
   (doseq [c coordinates]
-    (sb/bind (board-map c)
+    (sb/bind @(board-map c)
+             ;;(println @@(board-map c))
              (sb/transform model/extract-color)
              (sb/property (tile-map c) :background))))
 

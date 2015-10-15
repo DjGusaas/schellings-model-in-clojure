@@ -20,7 +20,7 @@
 
 
 (defn move-my-counters [me old new]
-      (println "kitten" old "/kitten")
+      (println "kitten")
  (assoc me old (dec (me old)) new (inc (me new)))
 
      ; (println new )

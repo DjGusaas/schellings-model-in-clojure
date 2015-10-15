@@ -26,22 +26,26 @@
         s (nth (deref model/positions) 1)
         si @s]
     (Thread/sleep 1000)
-    (swap! f (fn [_] si))
-    (swap! s (fn [_] fi))
+    ;(swap! f (fn [_] si))
+    ;(swap! s (fn [_] fi))
+        (println " ")
+    (println fi)
+        (println " ")
 
 
+    (defn modify-individual [individual k v]
+     (assoc individual k v))
 
+  ;  (send fi modify-individual :color (:color @fi))
+    (send si modify-individual :color (:color @fi))
 
-    ;;Unused
-    ;(defn modify-individual [individual k v]
-    ; (assoc individual k v))
     ; (doseq [agnt @model/population] (send agnt model/add-to-agent-map :test :val))
 
 
     ;(doseq [i @model/population] (send i assoc :test :value))
 
     ;A system state printout
-    (println "bye" @model/population)
+    (println "by" @model/population)
 
 
 
